@@ -1,0 +1,52 @@
+* {
+  font-size: 20px;
+}
+
+.results {
+  display: grid;
+  column-gap: 14px;
+  row-gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
+  margin-top: 50px;
+  justify-content: space-around;
+}
+input[type="text"] {
+  border: solid 1px royalblue;
+  padding: 10px;
+  border-radius: 8px;
+  margin-right: 4px;
+  display: inline-block;
+  min-width: 30%;
+  width: 500px;
+}
+button {
+  padding: 10px;
+  border: solid 1px royalblue;
+  background: royalblue;
+  color: white;
+  border-radius: 8px;
+}
+@media (min-width: 500px) and (max-width: 768px) {
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  input[type="text"] {
+    width: 70%;
+  }
+}
+@media (max-width: 499px) {
+  .results {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.91);
+}

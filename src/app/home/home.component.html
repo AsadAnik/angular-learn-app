@@ -1,0 +1,29 @@
+<section class="filter-section">
+  <form>
+    <input
+        type="text"
+        placeholder="Filter by city"
+        name="city"
+        id="city"
+        class="filter-input"
+        (change)="onFilterSearchChange($event)"
+        #searchFilter
+    />
+
+    <button
+      class="primary"
+      type="button"
+      (click)="searchFilterResults(searchFilter.value)"
+    >
+      Search
+    </button>
+  </form>
+</section>
+
+<section class="results">
+  <app-housing-location
+    *ngFor="let housingLocation of filteredLocationList"
+    [housingLocation]="housingLocation"
+  />
+</section>
+
