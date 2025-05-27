@@ -12,23 +12,17 @@ import { HousingService } from '../housing.service';
   standalone: true,
 })
 export class HomeComponent {
-  housingLocationList: HousingLocation[] = [];
+  private housingLocationList: HousingLocation[] = [];
   filteredLocationList: HousingLocation[] = [];
-  housingService: HousingService = inject(HousingService);
+  private readonly housingService: HousingService = inject(HousingService);
 
   constructor() {
-    this.housingLocationList = this.housingService.getAlHousingLocations();
+    this.housingService.getAlHousingLocations().then((housingListResponse: HousingLocation[]) => {
+      this.housingLocationList = housingListResponse;
+      this.filteredLocationList = housingListResponse;
+    });
+    console.log('Housing Location LIst - ', this.housingLocationList);
     this.filteredLocationList = this.housingLocationList;
-  }
-
-  /**
-   * Handles changes to the filter search input and triggers a search operation.
-   * @param {any} event - The event object from the input field. The event's `target.value` contains the search term entered by the user.
-   * @return {void} This method does not return a value.
-   */
-  onFilterSearchChange(event: any): void {
-    const searchTerm: string = event.target.value;
-    this.housingLocationList = this.housingService.searchItemsByTerms(searchTerm);
   }
 
   /**
@@ -36,12 +30,13 @@ export class HomeComponent {
    * @param searchFilterTerm
    */
   searchFilterResults(searchFilterTerm: string): void {
-    console.log('My Item here - ', searchFilterTerm);
     if (!searchFilterTerm) {
       this.filteredLocationList = this.housingLocationList;
       return;
     }
 
-    this.filteredLocationList = this.housingService.searchItemsByTerms(searchFilterTerm);
+    this.housingService.searchItemsByTerms(searchFilterTerm).then((searchResults: HousingLocation[]) => {
+      this.filteredLocationList = searchResults;
+    });
   }
 }

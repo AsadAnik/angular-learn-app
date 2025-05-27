@@ -3,7 +3,7 @@
  * amenities, and availability.
  */
 export interface HousingLocation {
-  id: number;
+  id: number | string;
   name: string;
   city: string;
   state: string;
